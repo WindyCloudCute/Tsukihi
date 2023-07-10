@@ -25,7 +25,7 @@ function updateSettings() {
     supportedURLs: supportedUrls,
     closeOnDL: closecheckbox.checked
   }, function () {
-    status.textContent = "👌 Saved!"
+    status.textContent = "👌 保存完成!"
   });
 
 }
@@ -40,11 +40,11 @@ function checkServer() {
   let apiCheck = "";
   let urlRegexText = "";
 
-  document.getElementById('apiCheck').textContent = "⌛ Checking...";
+  document.getElementById('apiCheck').textContent = "⌛ 检查...";
 
   // Test base server connectivity
   fetch(`${server.value}/api/info`, { method: "GET", headers: getAuthHeader(key.value) })
-    .then(response => response.ok ? response.json() : { error: "Server didn't reply." })
+    .then(response => response.ok ? response.json() : { error: "服务器没有正确响应。" })
     .then((data) => {
 
       if (data.error)
@@ -58,13 +58,13 @@ function checkServer() {
 
   // Test authenticated endpoint by getting Download plugins
   fetch(`${server.value}/api/plugins/download`, { method: "GET", headers: getAuthHeader(key.value) })
-    .then(response => response.ok ? response.json() : { error: "API Key seems to be invalid!" })
+    .then(response => response.ok ? response.json() : { error: "无法验证API Key是否有效!" })
     .then((data) => {
 
       if (data.error)
         throw new Error(data.error);
 
-      apiCheck = `✅ API Key is valid.`;
+      apiCheck = `✅ API密钥有效.`;
 
       supportedUrls = data.map(plug => plug.url_regex)
       urlRegexText = supportedUrls.join('\r\n');
@@ -79,7 +79,7 @@ function checkServer() {
   // Get categories from the server 
   document.getElementById('categoryErr').textContent = "";
   fetch(`${server.value}/api/categories`, { method: "GET", headers: getAuthHeader(key.value) })
-    .then(response => response.ok ? response.json() : { error: "API Key seems to be invalid!" })
+    .then(response => response.ok ? response.json() : { error: "无法验证API Key是否有效!" })
     .then((data) => {
 
       if (data.error)
@@ -89,7 +89,7 @@ function checkServer() {
       const catCombobox = document.getElementById('category');
       catCombobox.options.length = 0;
       // Add default
-      catCombobox.options[catCombobox.options.length] = new Option("-- No Category --", "", true, false);
+      catCombobox.options[catCombobox.options.length] = new Option("-- 未选择分类 --", "", true, false);
 
       // Add static categories, select if the ID matches the one we saved
       data.forEach(c => {
@@ -98,7 +98,7 @@ function checkServer() {
         }
       });
 
-      document.getElementById('categoryErr').textContent = "✅ Pulled categories from server correctly.";
+      document.getElementById('categoryErr').textContent = "✅ 成功从服务器获取分类。";
 
     }).catch(error => document.getElementById('categoryErr').textContent = `🛑 ${error}`);
 }

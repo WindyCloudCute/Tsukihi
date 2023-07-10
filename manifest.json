@@ -1,7 +1,7 @@
 {
   "name": "Tsukihi",
   "version": "1.2",
-  "description": "Send URLs to your LANraragi server for downloading! 🐦",
+  "description": "将URL发送到您的Lanraragi服务器下载! 🐦",
   "permissions": [
     "activeTab",
     "storage",
