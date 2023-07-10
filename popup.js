@@ -59,15 +59,13 @@ function updatePopup(dataFromBackground) {
     switch (dataFromBackground.status) {
       case "downloaded":
         document.getElementById('statusIcon').textContent = "✅";
-        document.getElementById('statusMsg').textContent = " saved to your LRR server!";
+        document.getElementById('statusMsg').textContent = " 此存档已经保存到您的LRR服务器!";
         document.getElementById('statusMsg').style = "color:green"
         document.getElementById('downloadUrl').disabled = true;
 
         chrome.storage.sync.get(['server'], function (result) {
           safeHtmlInject(document.getElementById('statusDetail'),
-            `<span>(id: <a href="${result.server}/reader?id=${dataFromBackground.arcId}" target= "_blank">
-                  ${dataFromBackground.arcId}
-                </a>)</span>`);
+            `<span>id: <a href="${result.server}/reader?id=${dataFromBackground.arcId}" target= "_blank">${dataFromBackground.arcId}</a></span>`);
         });
 
 
