@@ -74,31 +74,31 @@ function updatePopup(dataFromBackground) {
         break;
       case "downloading":
         document.getElementById('statusIcon').textContent = "🔜";
-        document.getElementById('statusMsg').textContent = " being downloaded...";
+        document.getElementById('statusMsg').textContent = " 正在下载...";
         document.getElementById('statusMsg').style = "color:blue"
         document.getElementById('statusDetail').textContent = `(job: #${dataFromBackground.jobId})`;
         break;
       case "checking":
         document.getElementById('statusIcon').textContent = "⌛";
-        document.getElementById('statusMsg').textContent = " being checked...";
+        document.getElementById('statusMsg').textContent = " 正在查询...";
         document.getElementById('statusMsg').style = "color:orange"
-        document.getElementById('statusDetail').textContent = `(Please wait warmly.)`;
+        document.getElementById('statusDetail').textContent = `(请静静的等待。)`;
         break;
       case "other":
         document.getElementById('statusIcon').textContent = "⁉";
-        document.getElementById('statusMsg').textContent = "... just a tab.";
+        document.getElementById('statusMsg').textContent = "... 是一个标签.";
         document.getElementById('statusDetail').textContent = `(${dataFromBackground.message})`;
         break;
       case "error":
         document.getElementById('statusIcon').textContent = "❌";
-        document.getElementById('statusMsg').textContent = " not okay.";
+        document.getElementById('statusMsg').textContent = " 不行.";
         document.getElementById('statusMsg').style = "color:red"
-        document.getElementById('statusDetail').textContent = `(Error: ${dataFromBackground.message})`;
+        document.getElementById('statusDetail').textContent = `(错误: ${dataFromBackground.message})`;
         break;
       default:
         document.getElementById('statusIcon').textContent = "👻";
         document.getElementById('statusMsg').textContent = " a mystery.";
-        document.getElementById('statusDetail').textContent = `(Unknown status message ${dataFromBackground.status})`;
+        document.getElementById('statusDetail').textContent = `(未知状态消息 ${dataFromBackground.status})`;
     }
   } catch (e) {
     console.log(e);
